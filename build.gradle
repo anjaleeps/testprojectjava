@@ -21,11 +21,20 @@ test {
     finalizedBy jacocoTestReport
 }
 
+def reportPath = "${project.rootDir.absolutePath}/build/coveragereport"
+def jacocoPath = "${project.rootDir.absolutePath}/build/reports/jacoco/test"
+task moveReport (type: Copy) {
+    copy{
+        from reportPath
+        into jacocoPath
+    }
+}
+
 jacocoTestReport {
-    dependsOn test
 
     reports {
         xml.enabled true
-        html.enabled true
+        html.enabled false
     }
+    finalizedBy moveReport
 }

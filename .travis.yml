@@ -1,0 +1,12 @@
+language: java
+jdk:
+  - openjdk11
+before_script:
+  - chmod +x gradlew
+script:
+  - ./gradlew jacocoTestReport
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+env:
+  global:
+    - CODECOV_TOKEN="3edfbc93-b2e9-456d-90c8-fa237a8d4f3c"
